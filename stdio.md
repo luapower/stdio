@@ -26,3 +26,4 @@ __error reporting__
 `stdio.clearerr(f)`                                              clear last errno
 `stdio.strerror(errno) -> s | nil`                               errno to string
 ---------------------------------------------------------------- ----------------------------------------------------------------
+
