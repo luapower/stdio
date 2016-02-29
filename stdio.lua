@@ -94,7 +94,7 @@ function M.reopen(f0, path, mode)
 end
 
 function M.read(f, buf, sz)
-	if sz == 0 then return end
+	if sz == 0 then return 0 end
 	assert(sz >= 1, 'invalid size')
 	if not buf then --null-read
 		local cur0, err, errno = f:seek()
@@ -110,7 +110,7 @@ end
 
 function M.write(f, buf, sz)
 	sz = sz or #buf
-	if sz == 0 then return end
+	if sz == 0 then return true end
 	assert(sz >= 1, 'invalid size')
 	local szwr = tonumber(C.fwrite(buf, 1, sz, f))
 	return ret(szwr == sz)

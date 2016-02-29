@@ -8,12 +8,6 @@ __Rationale:__ Even though standard file objects in LuaJIT are `FILE*`
 handles, there's no API to work with cdata buffers on those handles
 and avoid creating Lua strings. This module fixes that.
 
-> __NOTE__: `io`-opened file objects are _compatible_ with cdata `FILE*`
-objects but they're not fully equivalent. To be safe, use `f:close()`
-instead of `io.close()` or `stdio.close()`.
-
-> __NOTE:__ files larger than 4 Petabytes are not supported.
-
 ## API
 
 ---------------------------------------------------------------- ----------------------------------------------------------------
@@ -36,4 +30,19 @@ __error reporting__
 `stdio.clearerr(f)`                                              clear last errno
 `stdio.strerror(errno) -> s | nil`                               errno to string
 ---------------------------------------------------------------- ----------------------------------------------------------------
+
+__NOTE__: `io`-opened file objects are _compatible_ with cdata `FILE*`
+objects but they're not fully equivalent. To be safe, use `f:close()`
+instead of `io.close()` or `stdio.close()`.
+
+__NOTE:__ Don't forget to specify the `b` (binary) flag when opening files!
+
+__NOTE:__ Reading and writing zero bytes is allowed (negative sizes raise an error).
+
+__NOTE:__ Reading into a nil buffer is allowed (it just seeks).
+
+__NOTE:__ The "i/o stream" functions are unprotected (i.e. they raise errors)
+and can be used with codecs like [bmp] directly.
+
+__NOTE:__ Files larger than 4 Petabytes are not supported.
 
