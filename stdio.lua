@@ -101,7 +101,7 @@ end
 
 function M.write(f, buf, sz)
 	assert(sz >= 1, 'invalid size')
-	local szwr = tonumber(C.fwrite(buf, 1, sz, f))
+	local szwr = tonumber(C.fwrite(buf, 1, sz or #buf, f))
 	return ret(szwr == sz)
 end
 
@@ -115,6 +115,20 @@ local fileno = ffi.abi'win' and C._fileno or C.fileno
 function M.fileno(f)
 	local n = fileno(f)
 	return ret(n ~= -1 and n)
+end
+
+--stream API
+
+function M.reader(f)
+	return function(buf, sz)
+		assert(M.read(f, buf, sz) == sz)
+	end
+end
+
+function M.writer(f)
+	return function(buf, sz)
+		assert(M.write(f, buf, sz))
+	end
 end
 
 --hi-level API
