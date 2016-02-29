@@ -121,7 +121,8 @@ end
 
 function M.reader(f)
 	return function(buf, sz)
-		assert(M.read(f, buf, sz) == sz)
+		local readsz, err = M.read(f, buf, sz)
+		assert(readsz == sz, err)
 	end
 end
 
