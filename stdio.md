@@ -31,18 +31,21 @@ __error reporting__
 `stdio.strerror(errno) -> s | nil`                               errno to string
 ---------------------------------------------------------------- ----------------------------------------------------------------
 
-__NOTE__: `io`-opened file objects are _compatible_ with cdata `FILE*`
-objects but they're not fully equivalent. To be safe, use `f:close()`
+## Notes
+
+`io`-opened file objects are _compatible_ with cdata `FILE*`
+objects but they're not fully equivalent. To be safe, always use `f:close()`
 instead of `io.close()` or `stdio.close()`.
 
-__NOTE:__ Don't forget to specify the `b` (binary) flag when opening files!
+Don't forget to specify the `'b'` (binary) flag when opening files!
 
-__NOTE:__ Reading and writing zero bytes is allowed (negative sizes raise an error).
+Reading and writing zero bytes is allowed (negative sizes raise an error).
 
-__NOTE:__ Reading into a nil buffer is allowed (it just seeks).
+Reading into a nil buffer is allowed (it just seeks).
 
-__NOTE:__ The "i/o stream" functions are unprotected (i.e. they raise errors)
-and can be used with codecs like [bmp] directly.
+The "i/o stream" functions are unprotected (i.e. they raise errors
+including for partial reads/writes) and can thus be used with codecs
+like [bmp] directly.
 
-__NOTE:__ Files larger than 4 Petabytes are not supported.
+Files larger than 4 Petabytes are not supported.
 
