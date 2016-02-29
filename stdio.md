@@ -19,11 +19,11 @@ instead of `io.close()` or `stdio.close()`.
 ---------------------------------------------------------------- ----------------------------------------------------------------
 `stdio.reopen(f, path[, mode]) -> true | nil,err,errno`          close file/open a different file
 __i/o__
-`stdio.read(f, buf, sz) -> szread | nil,err,errno`               read more data from the file
+`stdio.read(f, [buf], sz) -> szread | nil,err,errno`             read more data from the file
 `stdio.write(f, s[, sz]) -> true | nil,err,errno`                write more data to the file
 `stdio.avail(f) -> sz | nil,err`                                 how many bytes to EOF
 `stdio.readfile(f[, 't']) -> data, sz`                           read entire file to a buffer
-`stdio.writefile(f, s[, sz[, 't']]) -> true |nil,err,errno`      write a string or cdata to a file
+`stdio.writefile(f, s[, sz[, 't']]) -> true | nil,err,errno`     write a string or cdata to a file
 __i/o streams__
 `stdio.reader(f) -> read(buf, sz)`                               make a reader function
 `stdio.writer(f) -> write(s[, sz])`                              make a writer function
